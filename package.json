@@ -2,7 +2,7 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vladibon.github.io/react-app",
+  "homepage": "https://vladibon.github.io/goit-react-hw-02-feedback/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
