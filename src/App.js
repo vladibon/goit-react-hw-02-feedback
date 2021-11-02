@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { Section } from './components/Section/Section';
-import { FeedbackOptions } from './components/FeedbackOptions/FeedbackOptions';
-import { Statistics } from './components/Statistics/Statistics';
-import { Notification } from './components/Notification/Notification';
+import { Section } from './components/Section';
+import { FeedbackOptions } from './components/FeedbackOptions';
+import { Statistics } from './components/Statistics';
+import { Notification } from './components/Notification';
 
 class App extends Component {
   state = {
@@ -22,6 +22,8 @@ class App extends Component {
     Math.round((this.state.good / this.countTotalFeedback()) * 100) || 0;
 
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
       <>
         <Section title='Please leave your feedback'>
@@ -34,9 +36,9 @@ class App extends Component {
         {this.countTotalFeedback() ? (
           <Section title='Statistics'>
             <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={this.countTotalFeedback()}
               positivePercentage={this.countPositiveFeedbackPercentage()}
             />

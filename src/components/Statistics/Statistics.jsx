@@ -21,7 +21,7 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => (
       </tbody>
     </table>
 
-    <h3>Positive feedback:</h3>
+    <p>Positive feedback:</p>
     <div>
       <span>{positivePercentage}%</span>
     </div>
