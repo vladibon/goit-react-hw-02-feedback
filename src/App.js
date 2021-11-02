@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { FeedbackOptions } from './components/FeedbackOptions';
+import { Statistics } from './components/Statistics';
 
 class App extends Component {
   state = {
@@ -7,60 +9,35 @@ class App extends Component {
     bad: 0,
   };
 
-  handleGoodFeedback = () => {
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
+  handleFeedback = type => {
+    this.setState(prevState => ({ [type]: prevState[type] + 1 }));
   };
 
-  handleNeutralFeedback = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
+  countTotalFeedback = () =>
+    Object.values(this.state).reduce((total, val) => total + val);
 
-  handleBadFeedback = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }));
-  };
+  countPositiveFeedbackPercentage = () =>
+    Math.round((this.state.good / this.countTotalFeedback()) * 100) || 0;
 
   render() {
     return (
-      <div className='feedbacks'>
-        <h2>Please leave feedback</h2>
+      <div className='feedback'>
+        <h2>Please leave your feedback</h2>
 
-        <div className='buttons'>
-          <button
-            className='good'
-            type='button'
-            onClick={this.handleGoodFeedback}
-          >
-            Good
-          </button>
-          <button
-            className='neutral'
-            type='button'
-            onClick={this.handleNeutralFeedback}
-          >
-            Neutral
-          </button>
-          <button
-            className='bad'
-            type='button'
-            onClick={this.handleBadFeedback}
-          >
-            Bad
-          </button>
-        </div>
+        <FeedbackOptions
+          options={Object.keys(this.state)}
+          onLeaveFeedback={this.handleFeedback}
+        />
 
         <h2>Statistics</h2>
 
-        <div>
-          <span>Good: {this.state.good}</span>
-          <span>Neutral: {this.state.neutral}</span>
-          <span>Bad: {this.state.bad}</span>
-        </div>
+        <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
+        />
       </div>
     );
   }
