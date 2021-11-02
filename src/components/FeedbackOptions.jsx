@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-function FeedbackOptions({ options, onLeaveFeedback }) {
-  return options.map(type => (
+const FeedbackOptions = ({ options, onLeaveFeedback }) =>
+  options.map(type => (
     <button
       key={type}
       className={type}
@@ -11,7 +11,6 @@ function FeedbackOptions({ options, onLeaveFeedback }) {
       {type}
     </button>
   ));
-}
 
 FeedbackOptions.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
