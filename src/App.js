@@ -1,8 +1,10 @@
 import { Component } from 'react';
+import { Container } from './components/Container';
 import { Section } from './components/Section';
 import { FeedbackOptions } from './components/FeedbackOptions';
-import { Statistics } from './components/Statistics';
 import { Notification } from './components/Notification';
+import { Statistics } from './components/Statistics';
+import { PercentageScale } from './components/PercentageScale';
 
 class App extends Component {
   state = {
@@ -16,37 +18,39 @@ class App extends Component {
   };
 
   countTotalFeedback = () =>
-    Object.values(this.state).reduce((total, val) => total + val);
+    Object.values(this.state).reduce((total, val) => total + val, 0);
 
-  countPositiveFeedbackPercentage = () =>
-    Math.round((this.state.good / this.countTotalFeedback()) * 100) || 0;
+  countFeedbackPercentage = type =>
+    Math.round((this.state[type] / this.countTotalFeedback()) * 100) || 0;
 
   render() {
     const { good, neutral, bad } = this.state;
+    const options = Object.keys(this.state);
+    const totalFeedback = this.countTotalFeedback();
 
     return (
-      <>
+      <Container>
         <Section title='Please leave your feedback'>
           <FeedbackOptions
-            options={Object.keys(this.state)}
+            options={options}
             onLeaveFeedback={this.handleFeedback}
           />
         </Section>
 
-        {this.countTotalFeedback() ? (
+        {totalFeedback ? (
           <Section title='Statistics'>
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={this.countTotalFeedback()}
-              positivePercentage={this.countPositiveFeedbackPercentage()}
+            <Statistics good={good} neutral={neutral} bad={bad} />
+
+            <PercentageScale
+              total={totalFeedback}
+              options={options}
+              countFeedbackPercentage={this.countFeedbackPercentage}
             />
           </Section>
         ) : (
           <Notification message='No feedback given'></Notification>
         )}
-      </>
+      </Container>
     );
   }
 }

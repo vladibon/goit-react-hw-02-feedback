@@ -1,0 +1,45 @@
+.scale {
+  width: 100%;
+  height: 34px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  background-color: #4d5467ee;
+  overflow: hidden;
+}
+
+.type {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+}
+
+.good {
+  composes: type;
+  background-color: #4d8679;
+}
+
+.neutral {
+  composes: type;
+  background-color: #4d5467ee;
+}
+
+.bad {
+  composes: type;
+  background-color: #f07878;
+}
+
+.total {
+  text-align: right;
+}
+
+.total span {
+  display: inline-block;
+  width: 30px;
+  font-size: 20px;
+  font-weight: 500;
+}
