@@ -13,6 +13,8 @@ class App extends Component {
     bad: 0,
   };
 
+  options = Object.keys(this.state);
+
   handleFeedback = type => {
     this.setState(prevState => ({ [type]: prevState[type] + 1 }));
   };
@@ -20,20 +22,19 @@ class App extends Component {
   countTotalFeedback = () =>
     Object.values(this.state).reduce((total, val) => total + val, 0);
 
-  countFeedbackPercentage = type =>
-    Math.round((this.state[type] / this.countTotalFeedback()) * 100) || 0;
+  countFeedbackPercentage = ({ type, total }) =>
+    Math.round((this.state[type] / total) * 100) || 0;
 
   render() {
     const { good, neutral, bad } = this.state;
-    const options = Object.keys(this.state);
     const totalFeedback = this.countTotalFeedback();
 
     return (
       <Container>
         <Section title='Please leave your feedback'>
           <FeedbackOptions
-            options={options}
-            onLeaveFeedback={this.handleFeedback}
+            options={this.options}
+            handleFeedback={this.handleFeedback}
           />
         </Section>
 
@@ -43,7 +44,7 @@ class App extends Component {
 
             <PercentageScale
               total={totalFeedback}
-              options={options}
+              options={this.options}
               countFeedbackPercentage={this.countFeedbackPercentage}
             />
           </Section>

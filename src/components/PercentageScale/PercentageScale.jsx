@@ -4,9 +4,10 @@ import s from './PercentageScale.module.css';
 const PercentageScale = ({ options, total, countFeedbackPercentage }) => (
   <div>
     <h3>Summary</h3>
+
     <div className={s.scale}>
       {options.map(type => {
-        const percentage = countFeedbackPercentage(type);
+        const percentage = countFeedbackPercentage({ type, total });
 
         return (
           <span
