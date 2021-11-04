@@ -4,8 +4,9 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
+  background-color: var(--neutral-color);
   border-radius: 4px;
-  background-color: #4d5467ee;
+  box-shadow: var(--shadow);
   overflow: hidden;
 }
 
@@ -15,22 +16,22 @@
   justify-content: center;
   font-size: 18px;
   font-weight: 500;
-  color: white;
+  color: var(--white-color);
 }
 
 .good {
   composes: type;
-  background-color: #4d8679;
+  background-color: var(--good-color);
 }
 
 .neutral {
   composes: type;
-  background-color: #4d5467ee;
+  background-color: var(--neutral-color);
 }
 
 .bad {
   composes: type;
-  background-color: #f07878;
+  background-color: var(--bad-color);
 }
 
 .total {

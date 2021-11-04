@@ -1,3 +1,8 @@
+.controls {
+  display: flex;
+  justify-content: space-around;
+}
+
 .button {
   min-width: 100px;
   padding: 10px;
@@ -5,17 +10,15 @@
   border-radius: 4px;
   cursor: pointer;
   text-transform: capitalize;
-  color: white;
-  background-color: #888;
-  transition: box-shadow var(--animation);
-}
-
-.button:not(:last-child) {
-  margin-right: 50px;
-}
-
-.button:hover {
+  color: var(--white-color);
   box-shadow: var(--shadow);
+  opacity: 0.86;
+  transition: opacity var(--animation);
+}
+
+.button:hover,
+.button:focus {
+  opacity: 1;
 }
 
 .good,
@@ -25,13 +28,13 @@
 }
 
 .good {
-  background-color: #4d8679;
+  background-color: var(--good-color);
 }
 
 .neutral {
-  background-color: #4d5467ee;
+  background-color: var(--neutral-color);
 }
 
 .bad {
-  background-color: #f07878;
+  background-color: var(--bad-color);
 }
