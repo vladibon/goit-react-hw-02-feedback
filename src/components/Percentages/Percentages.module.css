@@ -33,14 +33,3 @@
   composes: type;
   background-color: var(--bad-color);
 }
-
-.total {
-  text-align: right;
-}
-
-.total span {
-  display: inline-block;
-  width: 30px;
-  font-size: 20px;
-  font-weight: 500;
-}

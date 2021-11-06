@@ -1,1 +1,0 @@
-export { PercentageScale } from './PercentageScale';

@@ -4,7 +4,7 @@ import { Section } from './components/Section';
 import { FeedbackOptions } from './components/FeedbackOptions';
 import { Notification } from './components/Notification';
 import { Statistics } from './components/Statistics';
-import { PercentageScale } from './components/PercentageScale';
+import { Percentages } from './components/Percentages';
 
 class App extends Component {
   state = {
@@ -22,12 +22,16 @@ class App extends Component {
   countTotalFeedback = () =>
     Object.values(this.state).reduce((total, val) => total + val, 0);
 
-  countFeedbackPercentage = ({ type, total }) =>
-    Math.round((this.state[type] / total) * 100) || 0;
+  countFeedbackPercentages = total =>
+    this.options.map(type => ({
+      type,
+      percentage: Math.round((this.state[type] / total) * 100) || 0,
+    }));
 
   render() {
     const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
+    const percentages = this.countFeedbackPercentages(totalFeedback);
 
     return (
       <Container>
@@ -40,16 +44,17 @@ class App extends Component {
 
         {totalFeedback ? (
           <Section title='Statistics'>
-            <Statistics good={good} neutral={neutral} bad={bad} />
-
-            <PercentageScale
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={totalFeedback}
-              options={this.options}
-              countFeedbackPercentage={this.countFeedbackPercentage}
-            />
+            >
+              <Percentages percentages={percentages} />
+            </Statistics>
           </Section>
         ) : (
-          <Notification message='No feedback given'></Notification>
+          <Notification message='No feedback given' />
         )}
       </Container>
     );
