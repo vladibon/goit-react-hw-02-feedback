@@ -20,21 +20,6 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
-  "devDependencies": {
-    "eslint": "^7.32.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^11.2.6",
-    "prettier": "^2.4.1"
-  },
-  "lint-staged": {
-    "src/**/*.{json,css,scss,md}": [
-      "prettier --write"
-    ],
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint --cache --fix"
-    ]
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
